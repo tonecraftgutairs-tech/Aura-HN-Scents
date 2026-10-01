@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --gold-primary: #C5A059;
+    --gold-light: #E7C986;
+    --gold-dark: #8C6D2D;
+    --bg-dark: #080808;
+    --surface-dark: #121212;
+    --surface-elevated: #181818;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    background-color: #080808;
+    color: #E7E5E4;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-serif-luxury {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+
+  .font-brand {
+    font-family: 'Cinzel', 'Cormorant Garamond', serif;
+    letter-spacing: 0.15em;
+  }
+}
+
+/* Custom luxury gradients and glows */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F3E7C4 0%, #C5A059 50%, #9D7B32 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-gradient {
+  border-image: linear-gradient(to bottom right, rgba(197, 160, 89, 0.4), rgba(197, 160, 89, 0.05)) 1;
+}
+
+.subtle-gold-glow {
+  box-shadow: 0 0 50px -10px rgba(197, 160, 89, 0.12);
+}
+
+.card-luxury-hover {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
+}
+
+.card-luxury-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.8), 0 0 30px rgba(197, 160, 89, 0.12);
+  border-color: rgba(197, 160, 89, 0.35);
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #080808;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2620;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C5A059;
+}
+

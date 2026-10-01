@@ -1,0 +1,6 @@
+{
+  "name": "Aura HN Scents",
+  "description": "Discover Aura HN Scents — a luxury fragrance collection crafted to leave a lasting impression. Explore refined perfumes for men and women and order directly via WhatsApp.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
