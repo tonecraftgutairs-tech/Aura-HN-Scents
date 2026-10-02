@@ -18,11 +18,11 @@ export const CollectionSection: React.FC<CollectionSectionProps> = ({ onSelectPr
   });
 
   return (
-    <section id="collection" className="py-24 bg-[#080808] relative">
+    <section id="collection" className="py-24 bg-[#080808] relative overflow-hidden w-full max-w-full">
       {/* Background radial gold glow */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(197,160,89,0.06)_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[800px] max-w-full h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(197,160,89,0.06)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">

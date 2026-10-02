@@ -9,7 +9,7 @@ export const FloatingWhatsApp: React.FC<FloatingWhatsAppProps> = ({ onOpenChecko
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center gap-3">
       {/* Tooltip on hover/touch */}
       <div
         className={`hidden sm:flex items-center gap-2 bg-[#121212]/95 border border-[#C5A059]/30 text-stone-200 px-3.5 py-2 rounded-full text-xs font-medium shadow-2xl backdrop-blur-md transition-all duration-300 ${

@@ -10,12 +10,12 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick, onOpenCheckout }) => {
 
   return (
-    <section id="home" className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    <section id="home" className="relative min-h-[92vh] w-full max-w-full flex items-center justify-center pt-24 pb-16 overflow-hidden">
       {/* Cinematic dark luxury ambient backdrops & lighting */}
       <div className="absolute inset-0 bg-[#080808]" />
       
       {/* Radial soft gold highlight centered behind content */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(197,160,89,0.15)_0%,rgba(197,160,89,0.03)_50%,transparent_80%)] blur-3xl pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] max-w-full h-[500px] bg-[radial-gradient(ellipse_at_center,rgba(197,160,89,0.15)_0%,rgba(197,160,89,0.03)_50%,transparent_80%)] blur-3xl pointer-events-none" />
       
       {/* Subtle architectural vertical lines for high-end perfume boutique feel */}
       <div className="absolute inset-0 flex justify-between max-w-7xl mx-auto px-6 pointer-events-none opacity-10">
@@ -23,7 +23,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick, onOpen
         <div className="w-[1px] h-full bg-gradient-to-b from-transparent via-[#C5A059] to-transparent" />
       </div>
 
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Official Brand Logo Icon & Crest */}
         <div className="mb-8 flex flex-col items-center">
           <div className="w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center">

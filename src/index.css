@@ -10,11 +10,23 @@
     --surface-elevated: #181818;
   }
 
+  html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
   body {
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
     background-color: #080808;
     color: #E7E5E4;
-    overflow-x: hidden;
   }
 
   h1, h2, h3, .font-serif-luxury {

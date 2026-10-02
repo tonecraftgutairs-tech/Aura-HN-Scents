@@ -65,7 +65,7 @@ function MainSite() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#080808] text-stone-200 flex flex-col font-sans selection:bg-[#C5A059] selection:text-black">
+    <div className="min-h-screen bg-[#080808] text-stone-200 flex flex-col font-sans selection:bg-[#C5A059] selection:text-black w-full max-w-full overflow-x-hidden relative">
       {/* Sticky Top Bar Contract */}
       <Navbar
         onNavigate={handleNavigate}
@@ -74,7 +74,7 @@ function MainSite() {
       />
 
       {/* Main Content Sections */}
-      <main className="flex-grow">
+      <main className="flex-grow w-full max-w-full overflow-x-hidden">
         {/* 1. Cinematic Luxury Hero Section */}
         <HeroSection
           onExploreClick={() => handleNavigate('collection')}

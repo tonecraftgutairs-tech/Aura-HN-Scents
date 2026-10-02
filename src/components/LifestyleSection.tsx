@@ -4,18 +4,18 @@ import { AuraImage } from './AuraImage';
 
 export const LifestyleSection: React.FC = () => {
   return (
-    <section id="lifestyle" className="py-24 bg-[#0a0a0a] relative border-t border-b border-stone-900/80 overflow-hidden">
+    <section id="lifestyle" className="py-24 bg-[#0a0a0a] relative border-t border-b border-stone-900/80 overflow-hidden w-full max-w-full">
       {/* Soft warm light glow */}
-      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(197,160,89,0.07)_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[600px] max-w-full h-[600px] bg-[radial-gradient(circle,rgba(197,160,89,0.07)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Authentic Lifestyle & Customer Asset */}
           <div className="lg:col-span-6 relative">
             <div className="relative mx-auto max-w-lg lg:max-w-none">
               {/* Outer decorative gold frame */}
-              <div className="absolute -inset-4 border border-[#C5A059]/20 rounded-3xl pointer-events-none" />
+              <div className="absolute -inset-1 sm:-inset-4 border border-[#C5A059]/20 rounded-3xl pointer-events-none" />
               
               {/* Image Container with high-end luxury treatment */}
               <div className="relative rounded-2xl overflow-hidden bg-stone-950 aspect-[3/4] border border-stone-800 shadow-2xl flex items-center justify-center group">

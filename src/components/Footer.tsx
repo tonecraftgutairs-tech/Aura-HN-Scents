@@ -8,8 +8,8 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
-    <footer className="bg-[#050505] border-t border-stone-900 text-stone-400 py-16 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#050505] border-t border-stone-900 text-stone-400 py-16 relative overflow-hidden w-full max-w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-12 pb-12 border-b border-stone-800/80">
           
           {/* Brand Column with Logo */}

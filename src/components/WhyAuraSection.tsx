@@ -3,8 +3,8 @@ import { WHY_AURA_POINTS } from '../data/products';
 
 export const WhyAuraSection: React.FC = () => {
   return (
-    <section id="why-aura" className="py-24 bg-[#080808] relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="why-aura" className="py-24 bg-[#080808] relative overflow-hidden w-full max-w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto">

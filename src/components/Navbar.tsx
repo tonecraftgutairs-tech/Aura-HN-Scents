@@ -39,13 +39,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenCheckout, acti
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 w-full max-w-full z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-[#080808]/90 backdrop-blur-md border-b border-[#C5A059]/20 py-3 shadow-2xl'
           : 'bg-transparent border-b border-white/5 py-4'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Zone 1: Brand Wordmark & Official Logo */}
           <button

@@ -21,10 +21,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCheckout }
 
 
   return (
-    <section id="contact" className="py-24 bg-[#0a0a0a] relative border-t border-stone-900/80">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-[#0a0a0a] relative border-t border-stone-900/80 overflow-hidden w-full max-w-full">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="max-w-4xl mx-auto bg-gradient-to-b from-[#141414] to-[#0c0c0c] border border-stone-800 rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+        <div className="w-full max-w-4xl mx-auto bg-gradient-to-b from-[#141414] to-[#0c0c0c] border border-stone-800 rounded-3xl p-6 sm:p-12 shadow-2xl relative overflow-hidden">
           {/* Subtle gold ambient glow */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-[radial-gradient(circle,rgba(197,160,89,0.12)_0%,transparent_70%)] pointer-events-none" />
 

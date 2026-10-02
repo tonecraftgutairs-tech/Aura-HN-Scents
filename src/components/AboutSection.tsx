@@ -4,18 +4,18 @@ import { AuraImage } from './AuraImage';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="about" className="py-24 bg-[#0a0a0a] relative border-t border-b border-stone-900/80 overflow-hidden">
+    <section id="about" className="py-24 bg-[#0a0a0a] relative border-t border-b border-stone-900/80 overflow-hidden w-full max-w-full">
       {/* Subtle ambient lighting */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[radial-gradient(circle,rgba(197,160,89,0.08)_0%,transparent_70%)] pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-96 max-w-full h-96 bg-[radial-gradient(circle,rgba(197,160,89,0.08)_0%,transparent_70%)] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Editorial Imagery & Brand Crest */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
               {/* Outer decorative gold frame */}
-              <div className="absolute -inset-3 border border-[#C5A059]/20 rounded-2xl pointer-events-none" />
+              <div className="absolute -inset-1 sm:-inset-3 border border-[#C5A059]/20 rounded-2xl pointer-events-none" />
               
               {/* Image Container displaying official brand emblem */}
               <div className="relative rounded-xl overflow-hidden bg-stone-950 aspect-[4/5] border border-stone-800 shadow-2xl flex items-center justify-center p-8 group">
