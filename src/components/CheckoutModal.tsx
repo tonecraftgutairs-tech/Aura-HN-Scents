@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Product } from '../types';
-import { PRODUCTS, BRAND_CONFIG } from '../data/products';
+import { Product, Bundle } from '../types';
+import { PRODUCTS, BUNDLES, BRAND_CONFIG } from '../data/products';
 import { AuraImage } from './AuraImage';
 
 interface CheckoutModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialProduct?: Product | null;
+  initialBundle?: Bundle | null;
 }
 
 const PAKISTANI_CITIES = [
@@ -32,9 +33,10 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   isOpen,
   onClose,
   initialProduct,
+  initialBundle,
 }) => {
-  const [selectedProductId, setSelectedProductId] = useState<string>(
-    initialProduct?.id || PRODUCTS[0].id
+  const [selectedItemId, setSelectedItemId] = useState<string>(
+    initialBundle ? initialBundle.id : (initialProduct?.id || PRODUCTS[0].id)
   );
   const [quantity, setQuantity] = useState<number>(1);
   const [fullName, setFullName] = useState<string>('');
@@ -47,10 +49,12 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   useEffect(() => {
-    if (initialProduct) {
-      setSelectedProductId(initialProduct.id);
+    if (initialBundle) {
+      setSelectedItemId(initialBundle.id);
+    } else if (initialProduct) {
+      setSelectedItemId(initialProduct.id);
     }
-  }, [initialProduct]);
+  }, [initialProduct, initialBundle]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -68,17 +72,26 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
   if (!isOpen) return null;
 
-  const currentProduct =
-    PRODUCTS.find((p) => p.id === selectedProductId) || PRODUCTS[0];
+  // Determine if selected item is a bundle or individual product
+  const selectedBundle = BUNDLES.find((b) => b.id === selectedItemId);
+  const selectedProduct = !selectedBundle
+    ? PRODUCTS.find((p) => p.id === selectedItemId) || PRODUCTS[0]
+    : null;
 
-  // Calculate total price if numeric
-  const getSubtotal = () => {
-    if (currentProduct.isContactPrice) return 'Contact for Price';
-    const numPrice = parseInt(currentProduct.price.replace(/[^\d]/g, ''), 10);
-    if (isNaN(numPrice)) return currentProduct.price;
-    const total = numPrice * quantity;
-    return `PKR ${total.toLocaleString()}`;
-  };
+  const isBundle = !!selectedBundle;
+
+  // Pricing calculations
+  const unitPrice = isBundle
+    ? selectedBundle.offerPriceNum
+    : selectedProduct!.priceNumber;
+  const unitRegularPrice = isBundle
+    ? selectedBundle.regularPriceNum
+    : selectedProduct!.priceNumber;
+
+  const subtotal = unitPrice * quantity;
+  const regularSubtotal = unitRegularPrice * quantity;
+  const savings = isBundle ? (regularSubtotal - subtotal) : 0;
+  const finalPayable = subtotal;
 
   const validate = () => {
     const newErrors: { [key: string]: string } = {};
@@ -104,11 +117,23 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
 
     const finalCity = city === 'Other' ? customCity.trim() : city;
     
-    // Construct pre-filled professional WhatsApp message matching exact prompt format
+    // Construct pre-filled professional WhatsApp message
     let message = `Hello Aura HN Scents, I want to place an order.\n`;
     message += `- Name: ${fullName.trim()}\n`;
-    message += `- Product: ${currentProduct.name} (${currentProduct.volume})\n`;
-    message += `- Quantity: ${quantity}\n`;
+    if (isBundle && selectedBundle) {
+      message += `- Order: Duo Bundle Offer (15% OFF)\n`;
+      message += `- Bundle: ${selectedBundle.name}\n`;
+      message += `- Includes: ${selectedBundle.includes.join(' + ')}\n`;
+      message += `- Quantity: ${quantity}\n`;
+      message += `- Regular Price: PKR ${regularSubtotal.toLocaleString()}\n`;
+      message += `- Bundle Offer (15% OFF): PKR ${subtotal.toLocaleString()} (Saved PKR ${savings.toLocaleString()})\n`;
+    } else if (selectedProduct) {
+      message += `- Product: ${selectedProduct.name} (${selectedProduct.volume})\n`;
+      message += `- Quantity: ${quantity}\n`;
+      message += `- Price: PKR ${subtotal.toLocaleString()}\n`;
+    }
+    message += `- Delivery: FREE (Cash on Delivery)\n`;
+    message += `- Total Payable: PKR ${finalPayable.toLocaleString()}\n`;
     message += `- Address: ${address.trim()}, ${finalCity}\n`;
     message += `- Phone: ${phone.trim()}\n`;
     if (notes.trim()) {
@@ -172,34 +197,65 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           
           {/* Order Summary & Product Selector Box */}
           <div className="p-4 sm:p-5 rounded-2xl bg-[#161616] border border-stone-800 flex flex-col sm:flex-row items-center gap-5">
-            <div className="w-20 h-24 sm:w-24 sm:h-28 bg-black rounded-xl overflow-hidden border border-stone-800 shrink-0 flex items-center justify-center p-2">
-              <AuraImage
-                filename={currentProduct.imageFilename}
-                alt={currentProduct.imageAlt}
-                productName={currentProduct.name}
-                flaconStyle={currentProduct.flaconStyle}
-                className="w-full h-full object-contain"
-              />
+            {/* Visual Thumbnail */}
+            <div className="w-20 h-24 sm:w-24 sm:h-28 bg-black rounded-xl overflow-hidden border border-stone-800 shrink-0 flex items-center justify-center p-2 relative">
+              {isBundle && selectedBundle ? (
+                <div className="relative w-full h-full flex items-center justify-center">
+                  <div className="w-1/2 h-full -mr-2">
+                    <AuraImage
+                      filename={selectedBundle.images.first}
+                      alt={selectedBundle.images.firstAlt}
+                      flaconStyle={selectedBundle.images.firstStyle}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div className="w-1/2 h-full -ml-2">
+                    <AuraImage
+                      filename={selectedBundle.images.second}
+                      alt={selectedBundle.images.secondAlt}
+                      flaconStyle={selectedBundle.images.secondStyle}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </div>
+              ) : selectedProduct ? (
+                <AuraImage
+                  filename={selectedProduct.imageFilename}
+                  alt={selectedProduct.imageAlt}
+                  productName={selectedProduct.name}
+                  flaconStyle={selectedProduct.flaconStyle}
+                  className="w-full h-full object-contain"
+                />
+              ) : null}
             </div>
 
             <div className="flex-1 w-full space-y-3">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {/* Perfume Dropdown */}
+                {/* Fragrance / Bundle Dropdown */}
                 <div>
                   <label htmlFor="product-select" className="block text-[11px] uppercase tracking-wider text-stone-400 mb-1 font-medium">
-                    Selected Fragrance:
+                    Selected Item / Bundle:
                   </label>
                   <select
                     id="product-select"
-                    value={selectedProductId}
-                    onChange={(e) => setSelectedProductId(e.target.value)}
+                    value={selectedItemId}
+                    onChange={(e) => setSelectedItemId(e.target.value)}
                     className="w-full bg-[#1e1e1e] text-[#F3E7C4] border border-stone-700 rounded-xl px-3 py-2 text-xs sm:text-sm focus:outline-none focus:border-[#C5A059]"
                   >
-                    {PRODUCTS.map((prod) => (
-                      <option key={prod.id} value={prod.id}>
-                        {prod.name} — {prod.category} ({prod.price})
-                      </option>
-                    ))}
+                    <optgroup label="✨ Duo Bundle Offers (Save 15%)">
+                      {BUNDLES.map((b) => (
+                        <option key={b.id} value={b.id}>
+                          {b.name} · {b.offerPrice} (Save {b.savings})
+                        </option>
+                      ))}
+                    </optgroup>
+                    <optgroup label="💎 Individual Fragrances (50 ML EDP)">
+                      {PRODUCTS.map((prod) => (
+                        <option key={prod.id} value={prod.id}>
+                          {prod.name} — {prod.category} ({prod.price})
+                        </option>
+                      ))}
+                    </optgroup>
                   </select>
                 </div>
 
@@ -226,17 +282,75 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
                     >
                       +
                     </button>
-                    <span className="text-xs text-stone-500 font-mono ml-2">(50ml bottle{quantity > 1 ? 's' : ''})</span>
+                    <span className="text-xs text-stone-400 font-mono ml-2">
+                      {isBundle ? `(Duo Bundle${quantity > 1 ? 's' : ''})` : `(50 ML EDP bottle${quantity > 1 ? 's' : ''})`}
+                    </span>
                   </div>
                 </div>
               </div>
 
+              {/* Bundle Savings Badge if Bundle */}
+              {isBundle && selectedBundle && (
+                <div className="pt-2 flex items-center gap-2">
+                  <span className="text-[10px] uppercase tracking-wider text-black font-bold bg-gradient-to-r from-[#F3E7C4] to-[#C5A059] px-2.5 py-1 rounded-full shadow-sm">
+                    {selectedBundle.savingsBadge}
+                  </span>
+                  <span className="text-[11px] text-[#F3E7C4] font-medium">
+                    15% Duo Discount Applied
+                  </span>
+                </div>
+              )}
+
               {/* Price Calculation Row */}
-              <div className="pt-2 flex items-center justify-between border-t border-stone-800 text-xs">
-                <span className="text-stone-400">Total Estimated Amount:</span>
-                <span className="font-serif-luxury text-lg font-bold text-[#C5A059] tracking-wider tabular-nums">
-                  {getSubtotal()}
-                </span>
+              <div className="pt-3 border-t border-stone-800 space-y-1.5 text-xs">
+                {isBundle && selectedBundle ? (
+                  <>
+                    <div className="flex items-center justify-between text-stone-400">
+                      <span>Regular Price ({quantity}x Duo):</span>
+                      <span className="font-mono tabular-nums line-through text-stone-500">PKR {regularSubtotal.toLocaleString()}</span>
+                    </div>
+                    <div className="flex items-center justify-between text-[#C5A059] font-medium">
+                      <span className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059]" />
+                        <span>Duo Bundle Discount (15% OFF):</span>
+                      </span>
+                      <span className="font-mono tabular-nums font-semibold">-PKR {savings.toLocaleString()}</span>
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex items-center justify-between text-stone-400">
+                    <span>Item Price ({quantity}x {selectedProduct?.volume}):</span>
+                    <span className="font-mono tabular-nums text-stone-200">PKR {subtotal.toLocaleString()}</span>
+                  </div>
+                )}
+                
+                <div className="flex items-center justify-between text-stone-400">
+                  <span>Shipping Nationwide:</span>
+                  <span className="text-emerald-400 font-semibold font-mono">FREE (PKR 0)</span>
+                </div>
+
+                <div className="pt-2.5 border-t border-stone-800/80 flex items-center justify-between">
+                  <div>
+                    <span className="text-stone-200 font-semibold uppercase tracking-wider text-[11px] block">
+                      Total Payable (Cash on Delivery):
+                    </span>
+                    {isBundle && (
+                      <span className="text-[10px] text-stone-400 font-mono">
+                        PKR {regularSubtotal.toLocaleString()} → PKR {finalPayable.toLocaleString()}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-right">
+                    <span className="font-serif-luxury text-2xl font-bold text-[#F3E7C4] tracking-wider tabular-nums block">
+                      PKR {finalPayable.toLocaleString()}
+                    </span>
+                    {isBundle && (
+                      <span className="text-[9px] text-[#C5A059] font-mono block">
+                        Saved PKR {savings.toLocaleString()}
+                      </span>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -364,7 +478,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
           <div className="p-3.5 rounded-xl bg-stone-900/60 border border-stone-800 text-[11px] text-stone-400 flex items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#C5A059]" />
-              <span>Cash on Delivery (COD) / Bank Transfer across Pakistan</span>
+              <span>Cash on Delivery (COD) / Free Delivery across Pakistan</span>
             </div>
             <span className="text-stone-500 font-mono">100% Authentic Flacons</span>
           </div>

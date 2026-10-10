@@ -37,7 +37,7 @@ export const CollectionSection: React.FC<CollectionSectionProps> = ({ onSelectPr
           </h2>
           
           <p className="mt-4 text-stone-400 text-sm sm:text-base font-light max-w-xl mx-auto text-balance">
-            Four masterfully balanced compositions distilled to leave an unforgettable impression. Each bottle poured in a concentrated 50ml flacon.
+            Four masterfully balanced compositions distilled to leave an unforgettable impression. Each fragrance poured in a concentrated 50 ML EDP (Eau de Parfum) flacon.
           </p>
 
           {/* Interactive Filter Tabs (Zero-pill compliant segmented buttons) */}
@@ -90,7 +90,7 @@ export const CollectionSection: React.FC<CollectionSectionProps> = ({ onSelectPr
         {/* Quiet assurance banner */}
         <div className="mt-16 text-center">
           <p className="text-xs text-stone-400 tracking-wider">
-            All perfumes are concentrated 50ml Eau de Parfum. For custom gifting or bulk inquiries, contact us on WhatsApp.
+            All fragrances are concentrated 50 ML EDP (Eau de Parfum). For custom gifting or bulk inquiries, contact us on WhatsApp.
           </p>
         </div>
 

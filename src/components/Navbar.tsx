@@ -27,6 +27,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenCheckout, acti
     { label: 'Home', id: 'home' },
     { label: 'About', id: 'about' },
     { label: 'Collection', id: 'collection' },
+    { label: 'Duo Bundles', id: 'bundles' },
     { label: 'Why Aura', id: 'why-aura' },
     { label: 'Lifestyle', id: 'lifestyle' },
     { label: 'Contact', id: 'contact' },
@@ -41,11 +42,17 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenCheckout, acti
     <header
       className={`fixed top-0 left-0 right-0 w-full max-w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-[#080808]/90 backdrop-blur-md border-b border-[#C5A059]/20 py-3 shadow-2xl'
-          : 'bg-transparent border-b border-white/5 py-4'
+          ? 'bg-[#080808]/95 backdrop-blur-md border-b border-[#C5A059]/20 shadow-2xl'
+          : 'bg-[#080808]/85 backdrop-blur-sm border-b border-white/5'
       }`}
     >
-      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Sleek Launch Promotion Banner */}
+      <div className="w-full bg-gradient-to-r from-[#9D7B32] via-[#C5A059] to-[#F3E7C4] text-black py-1.5 px-4 text-center text-[11px] sm:text-xs font-semibold tracking-wide flex items-center justify-center gap-2 shadow-sm">
+        <span className="w-1.5 h-1.5 rounded-full bg-black animate-pulse" />
+        <span>Special Launch Offer: Save 15% on Exclusive Fragrance Duo Bundles + Free Shipping!</span>
+      </div>
+
+      <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
         <div className="flex items-center justify-between">
           {/* Zone 1: Brand Wordmark & Official Logo */}
           <button

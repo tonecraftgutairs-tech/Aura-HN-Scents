@@ -10,7 +10,7 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick, onOpenCheckout }) => {
 
   return (
-    <section id="home" className="relative min-h-[92vh] w-full max-w-full flex items-center justify-center pt-24 pb-16 overflow-hidden">
+    <section id="home" className="relative min-h-[92vh] w-full max-w-full flex items-center justify-center pt-28 sm:pt-32 pb-16 overflow-hidden">
       {/* Cinematic dark luxury ambient backdrops & lighting */}
       <div className="absolute inset-0 bg-[#080808]" />
       
@@ -50,9 +50,11 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onExploreClick, onOpen
           Discover refined fragrances crafted to leave a lasting impression.
         </p>
 
-        {/* Quick Highlights: 4 Master Perfumes, 50ml, Handcrafted Precision */}
-        <div className="mt-8 flex items-center justify-center gap-4 text-xs text-stone-400 uppercase tracking-widest">
-          <span>50ml Pure Parfum</span>
+        {/* Quick Highlights: 4 Master Fragrances, 50 ML EDP, Duo Bundles Offer */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-4 text-xs text-stone-400 uppercase tracking-widest">
+          <span>50 ML EDP</span>
+          <span aria-hidden="true" className="text-[#C5A059]">·</span>
+          <span className="text-[#C5A059]">Duo Bundles (Save 15%) · Free Delivery</span>
           <span aria-hidden="true" className="text-[#C5A059]">·</span>
           <span>Men & Women</span>
           <span aria-hidden="true" className="text-[#C5A059]">·</span>

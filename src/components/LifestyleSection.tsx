@@ -42,10 +42,10 @@ export const LifestyleSection: React.FC = () => {
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] tracking-widest uppercase text-stone-400 font-mono block">
-                      Pure Flacon
+                      EDP (Eau de Parfum)
                     </span>
                     <span className="text-xs text-[#F3E7C4] font-medium block">
-                      50ml Edition
+                      50 ML EDP
                     </span>
                   </div>
                 </div>

@@ -81,8 +81,8 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
 
             {/* Official Asset Tag Overlay */}
             <div className="absolute bottom-4 left-6 right-6 text-center">
-              <span className="text-[10px] tracking-widest uppercase text-stone-400 font-mono bg-black/60 px-3 py-1 rounded-full border border-white/5">
-                Authentic Brand Flacon · 50ml Edition
+              <span className="text-[10px] tracking-widest uppercase text-stone-300 font-mono bg-black/80 px-3 py-1 rounded-full border border-white/10">
+                Authentic Brand Flacon · 50 ML EDP
               </span>
             </div>
           </div>
@@ -104,16 +104,40 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
                 {product.name}
               </h2>
 
-              {/* Price */}
-              <div className="mt-3 flex items-baseline gap-3">
-                <span className={`font-serif-luxury text-2xl sm:text-3xl font-medium tracking-wide tabular-nums ${
-                  product.isContactPrice ? 'text-[#F3E7C4] italic text-xl' : 'text-[#C5A059]'
-                }`}>
-                  {product.price}
-                </span>
-                <span className="text-xs text-stone-400 uppercase tracking-wider">
-                  Inclusive of luxury packaging
-                </span>
+              {/* Brand Tagline & Sub-details */}
+              {product.brandTagline && (
+                <p className="mt-1 font-brand text-xs uppercase tracking-[0.25em] text-[#C5A059] font-medium">
+                  {product.brandTagline}
+                </p>
+              )}
+              {product.subDetails && (
+                <p className="text-xs tracking-wider uppercase text-stone-400 font-mono mt-0.5">
+                  {product.subDetails}
+                </p>
+              )}
+
+              {/* Fixed Regular Price & Free Delivery */}
+              <div className="mt-4 p-4 rounded-xl bg-stone-900/90 border border-stone-800 flex items-center justify-between">
+                <div>
+                  <span className="text-[11px] uppercase tracking-wider text-stone-400 font-medium block">
+                    Price
+                  </span>
+                  <div className="mt-1 flex items-baseline gap-3">
+                    <span className="font-serif-luxury text-3xl sm:text-4xl font-normal tracking-wide text-[#F3E7C4] tabular-nums">
+                      {product.price}
+                    </span>
+                    <span className="text-[10px] text-emerald-400 font-semibold uppercase tracking-wider bg-emerald-950/60 px-2.5 py-1 rounded border border-emerald-800/60">
+                      Free Shipping
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-stone-400 mt-1.5">
+                    Inclusive of signature luxury presentation flacon and box.
+                  </p>
+                </div>
+                <div className="text-right hidden sm:block">
+                  <span className="text-[10px] text-stone-400 uppercase tracking-widest block font-mono">Size & Type</span>
+                  <span className="text-xs text-[#F3E7C4] font-medium block">50 ML EDP</span>
+                </div>
               </div>
 
               {/* Fragrance Narrative */}
@@ -123,22 +147,25 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
 
               {/* Olfactory Architecture / Fragrance Pyramid */}
               <div className="mt-6 pt-5 border-t border-stone-800">
-                <h4 className="text-[11px] uppercase tracking-[0.2em] text-[#C5A059] font-medium mb-3">
-                  Olfactory Pyramid
-                </h4>
+                <div className="flex items-center justify-between mb-3">
+                  <h4 className="text-[11px] uppercase tracking-[0.2em] text-[#C5A059] font-medium">
+                    Olfactory Pyramid
+                  </h4>
+                  <span className="text-[10px] tracking-wider uppercase text-stone-500 font-mono">50 ML EDP</span>
+                </div>
                 
                 <div className="space-y-2.5 text-xs">
                   <div className="flex items-start gap-2">
-                    <span className="w-14 shrink-0 font-medium text-stone-400 uppercase text-[10px] tracking-wider pt-0.5">Top:</span>
-                    <span className="text-stone-200">{product.notes.top.join(' · ')}</span>
+                    <span className="w-16 shrink-0 font-medium text-stone-400 uppercase text-[10px] tracking-wider pt-0.5">TOP:</span>
+                    <span className="text-stone-200">{product.notes.top.join(', ')}</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="w-14 shrink-0 font-medium text-[#C5A059] uppercase text-[10px] tracking-wider pt-0.5">Heart:</span>
-                    <span className="text-[#F3E7C4]">{product.notes.heart.join(' · ')}</span>
+                    <span className="w-16 shrink-0 font-medium text-[#C5A059] uppercase text-[10px] tracking-wider pt-0.5">MIDDLE:</span>
+                    <span className="text-[#F3E7C4]">{product.notes.heart.join(', ')}</span>
                   </div>
                   <div className="flex items-start gap-2">
-                    <span className="w-14 shrink-0 font-medium text-stone-400 uppercase text-[10px] tracking-wider pt-0.5">Base:</span>
-                    <span className="text-stone-300">{product.notes.base.join(' · ')}</span>
+                    <span className="w-16 shrink-0 font-medium text-stone-400 uppercase text-[10px] tracking-wider pt-0.5">BASE:</span>
+                    <span className="text-stone-300">{product.notes.base.join(', ')}</span>
                   </div>
                 </div>
               </div>

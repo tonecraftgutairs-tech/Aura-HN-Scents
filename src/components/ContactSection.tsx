@@ -42,7 +42,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCheckout }
             {/* Interactive Quick Order Selector */}
             <div className="mt-8 max-w-md mx-auto p-4 rounded-2xl bg-black/60 border border-stone-800 text-left">
               <label htmlFor="quick-perfume-select" className="block text-[11px] uppercase tracking-wider text-stone-400 mb-2 font-medium">
-                Select Perfume for Immediate Order:
+                Select Fragrance for Immediate Order:
               </label>
               <select
                 id="quick-perfume-select"
@@ -52,7 +52,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCheckout }
               >
                 {PRODUCTS.map((prod) => (
                   <option key={prod.id} value={prod.id}>
-                    {prod.name} — {prod.category} ({prod.volume}) · {prod.price}
+                    {prod.name} — {prod.category} (50 ML EDP) · {prod.price}
                   </option>
                 ))}
               </select>
@@ -82,6 +82,16 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenCheckout }
                   className="text-[#F3E7C4] hover:text-[#C5A059] font-medium transition-colors"
                 >
                   {BRAND_CONFIG.whatsappFormatted}
+                </a>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-stone-500 uppercase tracking-widest font-mono">Email:</span>
+                <a 
+                  href={`mailto:${BRAND_CONFIG.email}`}
+                  className="text-[#F3E7C4] hover:text-[#C5A059] font-medium transition-colors"
+                >
+                  {BRAND_CONFIG.email}
                 </a>
               </div>
 

@@ -42,11 +42,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, onO
 
         {/* Clean, unboxed metadata pill-free header tags */}
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-[11px] tracking-widest uppercase pointer-events-none">
-          <span className="text-stone-400 bg-[#080808]/80 backdrop-blur-sm px-2.5 py-1 rounded border border-white/5 font-medium">
+          <span className="text-stone-300 bg-[#080808]/85 backdrop-blur-sm px-2.5 py-1 rounded border border-white/5 font-medium">
             {product.category} · {product.volume}
           </span>
-          <span className="text-[#C5A059] bg-[#080808]/80 backdrop-blur-sm px-2.5 py-1 rounded border border-[#C5A059]/20 font-serif-luxury italic text-xs">
-            Pure Parfum
+          <span className="text-[#C5A059] bg-[#080808]/90 backdrop-blur-sm px-2.5 py-0.5 rounded border border-[#C5A059]/30 text-[10px] font-medium tracking-wider">
+            EDP
           </span>
         </div>
 
@@ -61,11 +61,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, onO
       {/* Product Content Details */}
       <div className="p-6 flex flex-col flex-grow justify-between bg-gradient-to-b from-[#111111] to-[#0c0c0c]">
         <div>
-          {/* Category & Volume metadata unboxed */}
+          {/* Category & Volume metadata */}
           <div className="flex items-center gap-2 text-xs text-stone-400 tracking-wider">
             <span>For {product.category}</span>
             <span aria-hidden="true" className="text-[#C5A059]">·</span>
             <span>{product.volume}</span>
+            <span aria-hidden="true" className="text-[#C5A059]">·</span>
+            <span className="text-[#C5A059]">EDP (Eau de Parfum)</span>
           </div>
 
           {/* Product Name */}
@@ -76,6 +78,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, onO
             {product.name}
           </h3>
 
+          {/* Brand Tagline & Sub-details */}
+          {product.brandTagline && (
+            <p className="mt-0.5 text-[11px] uppercase tracking-[0.2em] text-[#C5A059] font-medium">
+              {product.brandTagline}
+            </p>
+          )}
+          {product.subDetails && (
+            <p className="text-[10px] uppercase tracking-wider text-stone-400 font-mono mt-0.5">
+              {product.subDetails}
+            </p>
+          )}
+
           {/* Short Fragrance Description */}
           <p className="mt-2 text-xs sm:text-sm text-stone-300 font-light leading-relaxed line-clamp-2">
             {product.shortDesc}
@@ -85,12 +99,22 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onSelect, onO
         {/* Price & Action Buttons */}
         <div className="mt-6 pt-4 border-t border-stone-800/80">
           <div className="flex items-baseline justify-between mb-4">
-            <span className="text-[11px] uppercase tracking-wider text-stone-400 font-medium">Price</span>
-            <span className={`font-serif-luxury text-xl font-medium tracking-wide tabular-nums ${
-              product.isContactPrice ? 'text-[#F3E7C4] italic text-base' : 'text-[#C5A059]'
-            }`}>
-              {product.price}
-            </span>
+            <div>
+              <span className="text-[11px] uppercase tracking-wider text-stone-400 font-medium block">
+                Price
+              </span>
+              <span className="font-serif-luxury text-2xl sm:text-3xl font-medium tracking-wide text-[#F3E7C4] tabular-nums">
+                {product.price}
+              </span>
+            </div>
+            <div className="text-right">
+              <span className="text-[10px] text-emerald-400 font-medium uppercase tracking-wider block">
+                Free Shipping
+              </span>
+              <span className="text-[9px] text-stone-500 block uppercase tracking-wider font-mono">
+                50 ML EDP
+              </span>
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-2">

@@ -87,10 +87,10 @@ export const AboutSection: React.FC = () => {
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full bg-[#C5A059]" />
                 <span className="text-xs uppercase tracking-widest text-stone-300 font-medium">
-                  50ml Artisanal Editions Available Across Pakistan
+                  50 ML EDP Artisanal Editions Available Across Pakistan
                 </span>
               </div>
-              <span className="text-xs text-[#C5A059] font-mono tabular-nums">1.7 FL OZ</span>
+              <span className="text-xs text-[#C5A059] font-mono tracking-wider">50 ML EDP</span>
             </div>
           </div>
 

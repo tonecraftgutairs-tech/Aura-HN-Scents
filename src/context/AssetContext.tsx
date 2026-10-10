@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { PERMANENT_IMAGES } from '../data/embeddedImages';
 
 interface AssetContextType {
   assetOverrides: Record<string, string>;
@@ -62,6 +63,13 @@ export const AssetProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const getAssetSrc = (filename: string): string | null => {
     if (assetOverrides[filename]) {
       return assetOverrides[filename];
+    }
+    const clean = filename.replace(/^(\/|images\/)+/, '');
+    if (PERMANENT_IMAGES[clean]) {
+      return PERMANENT_IMAGES[clean];
+    }
+    if (PERMANENT_IMAGES[filename]) {
+      return PERMANENT_IMAGES[filename];
     }
     return null;
   };

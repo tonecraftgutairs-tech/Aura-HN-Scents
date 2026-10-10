@@ -11,12 +11,12 @@ export const AssetManagerModal: React.FC = () => {
   if (!isAssetManagerOpen) return null;
 
   const targetList = [
-    { id: 'logo', name: 'Official Brand Logo (Image 1)', filename: BRAND_ASSETS.logo.filename },
-    { id: 'lifestyle', name: 'Customer / Lifestyle Image (Image 2)', filename: BRAND_ASSETS.lifestyle.filename },
-    { id: 'p1', name: 'Blossom Aura (Image 3)', filename: PRODUCTS[0].imageFilename },
-    { id: 'p2', name: 'The Divine Aura (Image 4)', filename: PRODUCTS[1].imageFilename },
-    { id: 'p3', name: 'The Alpha Aura (Image 5)', filename: PRODUCTS[2].imageFilename },
-    { id: 'p4', name: 'The Imperial Aura (Image 6)', filename: PRODUCTS[3].imageFilename },
+    { id: 'logo', name: 'Official Brand Logo', filename: BRAND_ASSETS.logo.filename },
+    { id: 'lifestyle', name: 'Customer / Lifestyle Image', filename: BRAND_ASSETS.lifestyle.filename },
+    { id: 'imperial', name: 'The Imperial Aura (50 ML EDP)', filename: 'the-imperial-aura.jpeg' },
+    { id: 'blossom', name: 'Blossom Aura (50 ML EDP)', filename: 'blossom-aura.jpeg' },
+    { id: 'alpha', name: 'The Alpha Aura (50 ML EDP)', filename: 'the-alpha-aura.jpeg' },
+    { id: 'divine', name: 'The Divine Aura (50 ML EDP)', filename: 'the-divine-aura.jpeg' },
   ];
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,17 +34,17 @@ export const AssetManagerModal: React.FC = () => {
         if (!targetFilename) {
           const lower = file.name.toLowerCase();
           if (lower.includes('1.27.56') || lower.includes('logo')) {
-            targetFilename = BRAND_ASSETS.logo.filename;
+            targetFilename = 'aura-logo.jpeg';
           } else if (lower.includes('1.31.23') || lower.includes('lifestyle')) {
-            targetFilename = BRAND_ASSETS.lifestyle.filename;
-          } else if (lower.includes('2.51.33') && !lower.includes('(1)')) {
-            targetFilename = PRODUCTS[0].imageFilename;
-          } else if (lower.includes('2.51.33') && lower.includes('(1)')) {
-            targetFilename = PRODUCTS[1].imageFilename;
-          } else if (lower.includes('2.51.34') && !lower.includes('(1)')) {
-            targetFilename = PRODUCTS[2].imageFilename;
-          } else if (lower.includes('2.51.34') && lower.includes('(1)')) {
-            targetFilename = PRODUCTS[3].imageFilename;
+            targetFilename = 'aura-lifestyle.jpeg';
+          } else if (lower.includes('imperial') || (lower.includes('2.51.34') && lower.includes('(1)'))) {
+            targetFilename = 'the-imperial-aura.jpeg';
+          } else if (lower.includes('blossom') || (lower.includes('2.51.33') && !lower.includes('(1)'))) {
+            targetFilename = 'blossom-aura.jpeg';
+          } else if (lower.includes('alpha') || (lower.includes('2.51.34') && !lower.includes('(1)'))) {
+            targetFilename = 'the-alpha-aura.jpeg';
+          } else if (lower.includes('divine') || (lower.includes('2.51.33') && lower.includes('(1)'))) {
+            targetFilename = 'the-divine-aura.jpeg';
           } else {
             // Default to actual uploaded file name
             targetFilename = file.name;

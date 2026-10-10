@@ -3,6 +3,7 @@ import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { AboutSection } from './components/AboutSection';
 import { CollectionSection } from './components/CollectionSection';
+import { BundlesSection } from './components/BundlesSection';
 import { LifestyleSection } from './components/LifestyleSection';
 import { WhyAuraSection } from './components/WhyAuraSection';
 import { ContactSection } from './components/ContactSection';
@@ -12,16 +13,18 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { CheckoutModal } from './components/CheckoutModal';
 import { AssetManagerModal } from './components/AssetManagerModal';
 import { AssetProvider } from './context/AssetContext';
-import { Product } from './types';
+import { Product, Bundle } from './types';
 
 function MainSite() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [checkoutProduct, setCheckoutProduct] = useState<Product | null>(null);
+  const [checkoutBundle, setCheckoutBundle] = useState<Bundle | null>(null);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState<boolean>(false);
   const [activeSection, setActiveSection] = useState<string>('home');
 
-  const handleOpenCheckout = (product?: Product | null) => {
+  const handleOpenCheckout = (product?: Product | null, bundle?: Bundle | null) => {
     setCheckoutProduct(product || null);
+    setCheckoutBundle(bundle || null);
     setIsCheckoutOpen(true);
   };
 
@@ -44,7 +47,7 @@ function MainSite() {
   // Scroll spy to update active navigation item
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'collection', 'lifestyle', 'why-aura', 'contact'];
+      const sections = ['home', 'about', 'collection', 'bundles', 'lifestyle', 'why-aura', 'contact'];
       const scrollPosition = window.scrollY + 200;
 
       for (const sectionId of sections) {
@@ -90,37 +93,43 @@ function MainSite() {
           onOrderProduct={(product) => handleOpenCheckout(product)}
         />
 
-        {/* 4. Lifestyle / Customer Section ("Wear Your Aura") */}
+        {/* 4. Dedicated Exclusive Duo Bundles Section */}
+        <BundlesSection
+          onOrderBundle={(bundle) => handleOpenCheckout(null, bundle)}
+        />
+
+        {/* 5. Lifestyle / Customer Section ("Wear Your Aura") */}
         <LifestyleSection />
 
-        {/* 5. Why Aura HN Scents Section */}
+        {/* 6. Why Aura HN Scents Section */}
         <WhyAuraSection />
 
-        {/* 6. Order Concierge & Direct Contact */}
+        {/* 7. Order Concierge & Direct Contact */}
         <ContactSection onOpenCheckout={(product) => handleOpenCheckout(product)} />
       </main>
 
-      {/* 7. Footer with Logo, Tagline, Links & Socials */}
+      {/* 8. Footer with Logo, Tagline, Links & Socials */}
       <Footer onNavigate={handleNavigate} />
 
       {/* Floating WhatsApp Action Button */}
       <FloatingWhatsApp onOpenCheckout={() => handleOpenCheckout()} />
 
-      {/* 8. Dedicated Product Detail Experience Modal */}
+      {/* Dedicated Product Detail Experience Modal */}
       <ProductDetailModal
         product={selectedProduct}
         onClose={() => setSelectedProduct(null)}
         onOrderNow={(product) => handleOpenCheckout(product)}
       />
 
-      {/* 9. Advanced Checkout / Order Form System */}
+      {/* Advanced Checkout / Order Form System */}
       <CheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
         initialProduct={checkoutProduct}
+        initialBundle={checkoutBundle}
       />
 
-      {/* 10. Official Client Brand Asset Manager */}
+      {/* Official Client Brand Asset Manager */}
       <AssetManagerModal />
     </div>
   );

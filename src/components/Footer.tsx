@@ -34,19 +34,30 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
 
             <p className="mt-5 text-xs text-stone-400 font-light max-w-sm leading-relaxed">
-              Refined artisanal perfumery crafted to leave a lasting impression. Hand-poured 50ml flacons designed to express your personal aura with unforgettable elegance.
+              Refined artisanal perfumery crafted to leave a lasting impression. Hand-poured 50 ML EDP flacons designed to express your personal aura with unforgettable elegance.
             </p>
 
-            <div className="mt-6 flex items-center gap-2 text-xs text-stone-300">
-              <span className="text-stone-500 font-mono text-[10px] uppercase tracking-wider">Direct Concierge:</span>
-              <a
-                href={getWhatsAppOrderUrl()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[#F3E7C4] hover:text-[#C5A059] font-medium transition-colors"
-              >
-                {BRAND_CONFIG.whatsappFormatted}
-              </a>
+            <div className="mt-6 flex flex-col space-y-2 text-xs text-stone-300">
+              <div className="flex items-center gap-2">
+                <span className="text-stone-500 font-mono text-[10px] uppercase tracking-wider">Direct Concierge:</span>
+                <a
+                  href={getWhatsAppOrderUrl()}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#F3E7C4] hover:text-[#C5A059] font-medium transition-colors"
+                >
+                  {BRAND_CONFIG.whatsappFormatted}
+                </a>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-stone-500 font-mono text-[10px] uppercase tracking-wider">Official Email:</span>
+                <a
+                  href={`mailto:${BRAND_CONFIG.email}`}
+                  className="text-[#F3E7C4] hover:text-[#C5A059] font-medium transition-colors"
+                >
+                  {BRAND_CONFIG.email}
+                </a>
+              </div>
             </div>
           </div>
 
@@ -162,6 +173,19 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <span>TikTok (@aurahnscents_official)</span>
               </a>
 
+              {/* Email */}
+              <a
+                href={`mailto:${BRAND_CONFIG.email}`}
+                className="inline-flex items-center gap-3 text-xs text-stone-300 hover:text-[#C5A059] transition-colors group"
+              >
+                <div className="w-8 h-8 rounded-full bg-stone-900 border border-stone-800 flex items-center justify-center group-hover:border-[#C5A059]/50 transition-colors">
+                  <svg className="w-4 h-4 text-[#C5A059]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <span>Email ({BRAND_CONFIG.email})</span>
+              </a>
+
               {/* WhatsApp direct */}
               <a
                 href={getWhatsAppOrderUrl()}
@@ -185,7 +209,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-stone-500">
           <p>© 2026 Aura HN Scents. All Rights Reserved.</p>
           <div className="mt-4 sm:mt-0 flex items-center gap-6 text-[11px] text-stone-500">
-            <span>Pure 50ml Flacons</span>
+            <span>50 ML EDP Flacons</span>
             <span aria-hidden="true">·</span>
             <span>National Delivery</span>
             <span aria-hidden="true">·</span>
