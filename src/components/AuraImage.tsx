@@ -42,6 +42,13 @@ const STATIC_IMAGE_MAP: Record<string, string> = {
   'WhatsApp Image 2026-10-01 at 1.31.23 PM.jpeg': lifestyleImg,
 };
 
+const EXACT_IMAGE_URLS: Record<string, string> = {
+  'aura-logo.jpeg': 'https://i.postimg.cc/8CHK9kpn/1000367313-photoaidcom-cropped-jpg.png',
+  'aura-lifestyle.jpeg': 'https://i.postimg.cc/X7fzdgMN/IMG-20261002-WA0015.jpg',
+  'WhatsApp Image 2026-10-01 at 1.27.56 PM.jpeg': 'https://i.postimg.cc/8CHK9kpn/1000367313-photoaidcom-cropped-jpg.png',
+  'WhatsApp Image 2026-10-01 at 1.31.23 PM.jpeg': 'https://i.postimg.cc/X7fzdgMN/IMG-20261002-WA0015.jpg',
+};
+
 export const AuraImage: React.FC<AuraImageProps> = ({
   filename,
   alt,
@@ -57,14 +64,21 @@ export const AuraImage: React.FC<AuraImageProps> = ({
   // Permanent, fixed image candidates guaranteed across Vercel and all static hosts
   const cleanName = LEGACY_IMAGE_MAP[filename] || filename;
   const encodedName = encodeURIComponent(filename);
+  const exactRemoteUrl = EXACT_IMAGE_URLS[cleanName] || EXACT_IMAGE_URLS[filename];
   const embeddedPermanentSrc = PERMANENT_IMAGES[cleanName] || PERMANENT_IMAGES[filename];
   const staticSrc = STATIC_IMAGE_MAP[cleanName] || STATIC_IMAGE_MAP[filename];
   const baseUrl = import.meta.env.BASE_URL || '/';
   const cleanBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
 
   const candidateSrcs = overrideSrc
-    ? [overrideSrc, ...(embeddedPermanentSrc ? [embeddedPermanentSrc] : []), ...(staticSrc ? [staticSrc] : [])]
+    ? [
+        ...(exactRemoteUrl ? [exactRemoteUrl] : []),
+        overrideSrc,
+        ...(embeddedPermanentSrc ? [embeddedPermanentSrc] : []),
+        ...(staticSrc ? [staticSrc] : []),
+      ]
     : [
+        ...(exactRemoteUrl ? [exactRemoteUrl] : []),
         ...(embeddedPermanentSrc ? [embeddedPermanentSrc] : []),
         ...(staticSrc ? [staticSrc] : []),
         `${cleanBase}${cleanName}`,

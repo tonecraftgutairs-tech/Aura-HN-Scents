@@ -18,10 +18,12 @@ export const BRAND_CONFIG: BrandConfig = {
 export const BRAND_ASSETS = {
   logo: {
     filename: 'aura-logo.jpeg',
+    url: 'https://i.postimg.cc/8CHK9kpn/1000367313-photoaidcom-cropped-jpg.png',
     alt: 'Aura HN Scents Official Logo - Fragrance That Speaks',
   },
   lifestyle: {
     filename: 'aura-lifestyle.jpeg',
+    url: 'https://i.postimg.cc/X7fzdgMN/IMG-20261002-WA0015.jpg',
     alt: 'Aura in Motion - Confidence In Every Spray, Fragrances That Speaks',
   },
 };
